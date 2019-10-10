@@ -13,8 +13,8 @@ pipeline {
   
   environment {
     // define environment variable active within pipeline
-    CNAME = "test_uw2_container"
-    INAME = "underworld2:jdev"
+    CNAME = "${env.BRANCH_NAME}"
+    INAME = "${INAME}"+"-container"
   }
 
   options {
@@ -78,7 +78,7 @@ pipeline {
           subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
           body: "Something is wrong with ${env.BUILD_URL}",
           // mimeType: 'text/html',
-          to: 'underworlddev@googlegroups.com'
+          to: 'house.of.barnie@gmail.com'
         )
     }
     unstable {
@@ -87,7 +87,7 @@ pipeline {
           subject: "Unstable Pipeline: ${currentBuild.fullDisplayName}",
           body: "Something is unstable with ${env.BUILD_URL}",
           // mimeType: 'text/html',
-          to: 'underworlddev@googlegroups.com'
+          to: 'house.of.barnie@gmail.com'
         )
     }
     success {
@@ -97,7 +97,7 @@ pipeline {
             subject: "Back to normal: ${currentBuild.fullDisplayName}",
             body: "Project is back to normal",
             // mimeType: 'text/html',
-            to: 'underworlddev@googlegroups.com'
+            to: 'house.of.barnie@gmail.com'
           )
         }
       }
