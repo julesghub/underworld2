@@ -14,7 +14,7 @@ pipeline {
   environment {
     // define environment variable active within pipeline
     CNAME = "${env.BRANCH_NAME}"
-    INAME = "${INAME}"+"-container"
+    INAME = "${CNAME}"+"-container"
   }
 
   options {
