@@ -41,14 +41,17 @@ def non_dimensionalise(dimValue):
 
     Parameters
     ----------
-    dimValue : pint quantity
+    dimValue : pint.Quantity 
+        A pint quantity.
 
     Returns
     -------
-    float: The scaled value.
+    float 
+        The scaled value.
 
-    Example:
-    --------
+    Example
+    -------
+
     >>> import underworld as uw
     >>> u = uw.scaling.units
 
@@ -184,7 +187,7 @@ def dimensionalise(value, units):
        isinstance(value, uw.swarm._swarmvariable.SwarmVariable)):
 
         tempVar = value.copy()
-        tempVar.data[...] = (value.data[...] * factor).to(units)
+        tempVar.data[...] = (value.data[...] * factor).to(units).magnitude
         return tempVar
     else:
         return (value * factor).to(units)
