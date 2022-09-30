@@ -10,7 +10,8 @@ ENV PYVER=3.10
 RUN apt-get update -qq \
 &&  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
         libxml2 \
-        libpython${PYVER}
+        libpython${PYVER} \
+        badlands
         
 
 FROM base_runtime AS build_base
