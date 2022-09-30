@@ -81,12 +81,12 @@ jobs:
           push: true
           file: ./docs/development/docker/petsc/Dockerfile
           platforms: linux/amd64
-          tags: underworldcode/petsc:amd64
+          tags: julesg/petsc:amd64
       
       - name: Update manifest
         run: |
-          docker manifest create underworldcode/petsc --amend underworldcode/petsc:amd64 --amend underworldcode/petsc:arm64
-          docker manifest push underworldcode/petsc
+          docker manifest create julesg/petsc --amend julesg/petsc:amd64 --amend julesg/petsc:arm64
+          docker manifest push julesg/petsc
       
   build_lavavu_image:
     name: Build Lavavu Docker image
@@ -151,12 +151,12 @@ jobs:
           push: true
           file: ./docs/development/docker/base/Dockerfile
           platforms: linux/amd64
-          tags: underworldcode/base:amd64
+          tags: julesg/base:amd64
       
       - name: Update manifest
         run: |
-          docker manifest create underworldcode/base --amend underworldcode/base:amd64 --amend underworldcode/base:arm64
-          docker manifest push underworldcode/base
+          docker manifest create julesg/base --amend julesg/base:amd64 --amend julesg/base:arm64
+          docker manifest push julesg/base
 
 
   build_underworld_image:
@@ -174,8 +174,8 @@ jobs:
       
       - name: Update sha256
         run: |
-          docker pull underworldcode/base
-          SHA256=$(docker inspect --format='{{index .RepoDigests 0}}' underworldcode/base)
+          docker pull julesg/base
+          SHA256=$(docker inspect --format='{{index .RepoDigests 0}}' julesg/base)
           sed -i "/sha256/c\FROM ${SHA256} as base_runtime" ./docs/development/docker/underworld2/Dockerfile
 
       - name: Login to DockerHub
@@ -191,12 +191,12 @@ jobs:
           push: true
           file: ./docs/development/docker/underworld2/Dockerfile
           platforms: linux/amd64
-          tags: underworldcode/underworld2:amd64
+          tags: julesg/underworld2:amd64
 
       - name: Update manifest
         run: |
-          docker manifest create underworldcode/underworld2 --amend underworldcode/underworld2:amd64 --amend underworldcode/underworld2:arm64
-          docker manifest push underworldcode/underworld2
+          docker manifest create julesg/underworld2 --amend julesg/underworld2:amd64 --amend julesg/underworld2:arm64
+          docker manifest push julesg/underworld2
 
 
   test_in_UW_Container:
@@ -205,7 +205,7 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     container:
-      image: underworldcode/base
+      image: julesg/base
       options: --user root
     steps:
 
