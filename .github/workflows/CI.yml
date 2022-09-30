@@ -83,10 +83,10 @@ jobs:
           platforms: linux/amd64
           tags: julesg/petsc:amd64
       
-      - name: Update manifest
-        run: |
-          docker manifest create julesg/petsc --amend julesg/petsc:amd64 --amend julesg/petsc:arm64
-          docker manifest push julesg/petsc
+          #      - name: Update manifest
+          #        run: |
+          #          docker manifest create julesg/petsc --amend julesg/petsc:amd64 --amend julesg/petsc:arm64
+          #          docker manifest push julesg/petsc
       
   build_lavavu_image:
     name: Build Lavavu Docker image
@@ -119,10 +119,10 @@ jobs:
           platforms: linux/amd64
           tags: underworldcode/lavavu:amd64
       
-      - name: Update manifest
-        run: |
-          docker manifest create underworldcode/lavavu --amend underworldcode/lavavu:amd64 --amend underworldcode/lavavu:arm64
-          docker manifest push underworldcode/lavavu
+          #       - name: Update manifest
+          #         run: |
+          #           docker manifest create underworldcode/lavavu --amend underworldcode/lavavu:amd64 --amend underworldcode/lavavu:arm64
+          #           docker manifest push underworldcode/lavavu
 
 
   build_base_image:
@@ -153,10 +153,10 @@ jobs:
           platforms: linux/amd64
           tags: julesg/base:amd64
       
-      - name: Update manifest
-        run: |
-          docker manifest create julesg/base --amend julesg/base:amd64 --amend julesg/base:arm64
-          docker manifest push julesg/base
+          #       - name: Update manifest
+          #         run: |
+          #           docker manifest create julesg/base --amend julesg/base:amd64 --amend julesg/base:arm64
+          #           docker manifest push julesg/base
 
 
   build_underworld_image:
@@ -193,10 +193,10 @@ jobs:
           platforms: linux/amd64
           tags: julesg/underworld2:amd64
 
-      - name: Update manifest
-        run: |
-          docker manifest create julesg/underworld2 --amend julesg/underworld2:amd64 --amend julesg/underworld2:arm64
-          docker manifest push julesg/underworld2
+          #       - name: Update manifest
+          #         run: |
+          #           docker manifest create julesg/underworld2 --amend julesg/underworld2:amd64 --amend julesg/underworld2:arm64
+          #           docker manifest push julesg/underworld2
 
 
   test_in_UW_Container:
