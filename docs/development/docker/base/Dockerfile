@@ -69,8 +69,8 @@ RUN apt-get update \
 RUN PYTHONPATH= /usr/bin/pip3 install -r /opt/requirements.txt
 
 # mpi, petsc, mpi4py, petsc4py, h5py
-COPY --from=underworldcode/petsc /opt       /opt
-COPY --from=underworldcode/petsc /usr/local /usr/local
+COPY --from=julesg/petsc:3.17.1 /opt       /opt
+COPY --from=julesg/petsc:3.17.1 /usr/local /usr/local
 RUN apt-get update \
 &&  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends $(awk '{print $1'} /opt/installed.txt) \
 &&  apt-get clean \

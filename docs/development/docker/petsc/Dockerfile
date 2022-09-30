@@ -1,4 +1,6 @@
-FROM ubuntu:22.04 as base_runtime
+#FROM ubuntu:22.04 as base_runtime
+FROM julesg/openmpi:4.1.4 as base_runtime
+
 LABEL maintainer="https://github.com/underworldcode/"
 ENV LANG=C.UTF-8
 ENV PYVER=3.10
@@ -54,21 +56,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
         libopenblas-dev \
         libz-dev \
         cmake \
-        git
-# build mpi
-WORKDIR /tmp/mpich-build
-ARG MPICH_VERSION="3.4.3"
-RUN wget http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz 
-RUN  tar xvzf mpich-${MPICH_VERSION}.tar.gz 
-WORKDIR /tmp/mpich-build/mpich-${MPICH_VERSION}              
-# take from https://github.com/PawseySC/pawsey-containers/blob/master/mpi/mpich-base/Dockerfile
-ARG MPICH_CONFIGURE_OPTIONS="--enable-fast=all,O3 --prefix=/usr/local --with-device=ch4:ofi FFLAGS=-fallow-argument-mismatch FCFLAGS=-fallow-argument-mismatch"
-#ARG MPICH_CONFIGURE_OPTIONS="--prefix=/usr/local --enable-g=option=none --disable-debuginfo --enable-fast=O3,ndebug --without-timing --without-mpit-pvars --with-device=ch3 FFLAGS=-fallow-argument-mismatch FCFLAGS=-fallow-argument-mismatch"
-ARG MPICH_MAKE_OPTIONS="-j8"
-RUN ./configure ${MPICH_CONFIGURE_OPTIONS} 
-RUN make ${MPICH_MAKE_OPTIONS}             
-RUN make install                           
-RUN ldconfig
+        git \
+        ssh
 
 # create venv now for forthcoming python packages
 USER $NB_USER
